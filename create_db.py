@@ -53,6 +53,7 @@ def create_database():
          'Насыщенный вкус с земляными нотами, легкая пряность и долгое послевкусие', 
          680.0, 200)
     ]
+    # взял из интернета
     
     cursor.executemany('''
         INSERT INTO coffee (name, roast_level, bean_type, taste_description, price, package_volume)
