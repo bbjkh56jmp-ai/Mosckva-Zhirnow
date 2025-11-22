@@ -1,0 +1,46 @@
+import sqlite3
+import os
+
+def create_database():
+    # Удаляем существующую базу если есть
+    if os.path.exists('coffee.sqlite'):
+        os.remove('coffee.sqlite')
+    
+    conn = sqlite3.connect('coffee.sqlite')
+    cursor = conn.cursor()
+    
+    # Создаем таблицу
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS coffee (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            roast_level TEXT NOT NULL,
+            bean_type TEXT NOT NULL,
+            taste_description TEXT,
+            price REAL NOT NULL,
+            package_volume INTEGER NOT NULL
+        )
+    ''')
+    
+    # Добавляем тестовые данные
+    sample_data = [
+        ('Эфиопия Иргачеффе', 'Светлая', 'В зернах', 'Яркий цветочный аромат с нотами бергамота и цитрусов', 1250.0, 250),
+        ('Колумбия Супремо', 'Средняя', 'В зернах', 'Сбалансированный вкус с ореховыми и шоколадными нотами', 980.0, 250),
+        ('Бразилия Сантос', 'Темная', 'Молотый', 'Крепкий насыщенный вкус с горьковатым послевкусием', 750.0, 200),
+        ('Гватемала Антигуа', 'Средняя', 'В зернах', 'Пряный аромат с шоколадными и карамельными нотами', 1100.0, 250),
+        ('Кения АА', 'Светлая', 'Молотый', 'Яркая кислинка с ягодными и винными нотами', 1350.0, 200),
+        ('Италия Эспрессо', 'Очень темная', 'В зернах', 'Интенсивный крепкий вкус для эспрессо', 890.0, 250),
+        ('Коста-Рика Тарразу', 'Средняя', 'В зернах', 'Чистый вкус с фруктовыми нотами и сладким послевкусием', 1420.0, 250)
+    ]
+    
+    cursor.executemany('''
+        INSERT INTO coffee (name, roast_level, bean_type, taste_description, price, package_volume)
+        VALUES (?, ?, ?, ?, ?, ?)
+    ''', sample_data)
+    
+    conn.commit()
+    conn.close()
+    print("База данных coffee.sqlite успешно создана!")
+
+if __name__ == '__main__':
+    create_database()
