@@ -88,5 +88,4 @@ class AddEditCoffeeDialog(QDialog):
             
         except sqlite3.Error as e:
             QMessageBox.critical(self, "Ошибка", f"Ошибка сохранения: {e}")
-        # из инета ошибка
-    
+        # из инета
