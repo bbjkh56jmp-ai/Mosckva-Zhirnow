@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
+    <width>1400</width>
     <height>700</height>
    </rect>
   </property>
@@ -15,22 +15,38 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow {
-    background-color: #f5f5f5;
+    background-color: #f8f4f0;
+    font-family: Arial, sans-serif;
 }
 QLabel {
     color: #4a2c2a;
-    padding: 10px;
+    padding: 15px;
+    background-color: #e6d2c3;
+    border-radius: 8px;
+    margin: 10px;
 }
 QTableWidget {
     background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border: 2px solid #d7ccc8;
+    border-radius: 8px;
+    gridline-color: #d7ccc8;
+    font-size: 11px;
+}
+QTableWidget::item {
+    padding: 8px;
+    border-bottom: 1px solid #e0e0e0;
+}
+QTableWidget::item:selected {
+    background-color: #8d6e63;
+    color: white;
 }
 QHeaderView::section {
-    background-color: #8b4513;
+    background-color: #6d4c41;
     color: white;
-    padding: 8px;
-    border: 1px solid #ddd;
+    padding: 12px;
+    border: 1px solid #5d4037;
+    font-weight: bold;
+    font-size: 12px;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -39,13 +55,13 @@ QHeaderView::section {
      <widget class="QLabel" name="label">
       <property name="font">
        <font>
-        <pointsize>18</pointsize>
+        <pointsize>16</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
       <property name="text">
-       <string>☕ Каталог кофе</string>
+       <string>Каталог кофе - информация о сортах</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -61,6 +77,12 @@ QHeaderView::section {
        <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
       </property>
       <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+      <property name="cornerButtonEnabled">
+       <bool>false</bool>
+      </property>
+      <property name="alternatingRowColors">
        <bool>true</bool>
       </property>
      </widget>

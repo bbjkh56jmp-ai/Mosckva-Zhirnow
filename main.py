@@ -20,6 +20,7 @@ class CoffeeApp(QtWidgets.QMainWindow):
             cursor.execute('''
                 SELECT id, name, roast_level, bean_type, taste_description, price, package_volume
                 FROM coffee
+                ORDER BY id
             ''')
             
             coffee_data = cursor.fetchall()
@@ -27,7 +28,7 @@ class CoffeeApp(QtWidgets.QMainWindow):
             self.tableWidget.setRowCount(len(coffee_data))
             self.tableWidget.setColumnCount(7)
             self.tableWidget.setHorizontalHeaderLabels([
-                'ID', 'Название', 'Степень обжарки', 'Тип', 'Описание вкуса', 'Цена', 'Объем упаковки'
+                'ID', 'Название сорта', 'Степень обжарки', 'Тип', 'Описание вкуса', 'Цена (руб)', 'Объем упаковки (г)'
             ])
             
             for row, coffee in enumerate(coffee_data):
@@ -35,6 +36,12 @@ class CoffeeApp(QtWidgets.QMainWindow):
                     item = QTableWidgetItem(str(value))
                     item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
                     self.tableWidget.setItem(row, col, item)
+            
+            for col in [0, 5, 6]:
+                for row in range(len(coffee_data)):
+                    item = self.tableWidget.item(row, col)
+                    if item:
+                        item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             
             conn.close()
             
